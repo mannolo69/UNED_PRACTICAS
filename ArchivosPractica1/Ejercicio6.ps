@@ -1,0 +1,89 @@
+%!PS-Adobe-3.0
+
+28.35 28.35 scale
+/cuadrado
+{
+gsave
+1 28.35 div setlinewidth
+newpath
+0 0 moveto
+0 29.7 lineto
+20.95 29.7 lineto
+20.95 0 lineto
+closepath
+stroke
+grestore
+} def
+/arcotan {0.6 neg dup dup mul 1 exch sub sqrt div} bind def
+/conv {3.14159 mul 180 div} bind def
+/Arial findfont
+0.7 scalefont setfont
+
+cuadrado
+newpath
+2 27 moveto
+(Ejercicio 6.) show
+2 26 moveto
+(Una recta viene dada por la ecuacion general) show
+6 25 moveto
+ (Ax + By + C = 0 \n) show
+2 24 moveto
+(¿Que pendiente tiene?) show
+
+
+
+newpath
+2 22 moveto
+% Calcular la pendiente m
+%/ratio A neg B div def
+%/m ratio def
+
+
+(despejando y obtenemos ) show
+2 21 moveto
+(y = -Ax/B -C/B con y=(-A/B)x - (C/B) entonces y=mx+b) show
+2 19 moveto
+(donde m, pendiente m=-A/B, b ordenada en origen -C/B) show
+2 18 moveto
+(ecuacion punto pendiente y1=y2+m(x2-x1)) show
+2 17 moveto
+(coeficiente de x que es (x2-x1), b como y2) show
+2 16 moveto
+(la interpretacion geometrica: indica la inclinacion de la recta) show
+
+
+1.0 15 moveto
+(¿Como podremos obtener en PS el angulo de corte) show
+1.0 14 moveto
+(con el eje X de la recta?) show
+1.4 13 moveto
+(pendiente = (m mult tang angulo) = y2-y1/x2-x1) show
+1.5 12 moveto
+(luego utilizamos la funcion atan de la pendiente) show
+1.5 11 moveto
+(angulo de inclinacion recta con X = atan(pendiente)) show
+1.5 10 moveto
+(en postscrip la funcion atan utiliza y/x) show
+newpath
+1.5 9 moveto
+(dando el argumento polar del punto (x,y), en sexagesimal) show
+
+
+%/angulo B A atan def
+%/angulo A neg B atan def
+%angulo
+%(          ) cvs show ( grados) show
+
+%1.5 16.7 moveto
+% Convertir el ángulo theta de radianes a grados
+%/thetagrados angulo 180 mul 3.14159 div def
+
+% Imprimir resultados
+%newpath
+%2 14.7 moveto
+% Calcular el ángulo theta en radianes
+%(angulo = ) show
+%thetagrados
+%(            ) cvs show
+gsave fill grestore stroke
+showpage

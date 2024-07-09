@@ -1,0 +1,91 @@
+%!PS-Adobe-3.0
+%Informatica Grafica - Practica 1
+%Manuel Diaz Castro
+
+
+28.35 28.35 scale
+/cuadrado
+{
+gsave
+1 28.35 div setlinewidth
+newpath
+0 0 moveto
+0 29.7 lineto
+20.95 29.7 lineto
+20.95 0 lineto
+closepath
+stroke
+grestore
+} def
+
+/Arial findfont
+0.7 scalefont setfont
+
+cuadrado
+newpath
+0.1 27.7 moveto
+(Ejercicio 3.) show
+0.3 26.7 moveto
+(Una cosa a tener en cuenta es que PostScript utiliza\n) show
+0.3 25.7 moveto
+(los angulos en medida sexagesimal tanto como parametros\n) show
+0.3 24.7 moveto
+(como resultado en las formulas trigonometricas.\n) show
+0.3 23.7 moveto
+(Calcula en PostScript el seno, coseno y tangente de pi/4, 3pi/2.) show
+0.1 21.7 moveto
+(Si tenemos en cuenta que pi/4 = 45 grados y 3pi/2 = 270 grados,\n) show
+1.0 19.7 moveto
+(seno de pi/4 resulta en radianes ) show
+
+45 sin
+(            ) cvs show (= raiz cuadrada 2/2) show
+
+
+newpath
+1.0 18.7 moveto
+(coseno de pi/4 resulta en radianes ) show
+
+45 cos
+(            ) cvs show (= raiz cuadrada 2/2) show
+
+
+newpath
+1.0 17.7 moveto
+(tangente de pi/4 resulta ) show
+/a 45 sin def
+/b 45 cos def
+a b div
+(            ) cvs show ( porque seno45/coseno45 = 1 rad) show
+
+
+
+newpath
+1.0 15.7 moveto
+(seno de 3pi/2 resulta ) show
+
+270 sin
+(            ) cvs show ( rad) show
+
+
+newpath
+1.0 14.7 moveto
+(coseno de 3pi/2 = ) show
+
+270 cos
+(            ) cvs show ( rad) show
+
+
+
+newpath
+1.0 13.7 moveto
+(tangente de 3pi/2 = no esta definida en radianes ya que) show
+7.5 12.7 moveto
+(implica una division por 0) show
+%/a 270 sin def
+%/b 270 cos def
+%a b div
+%(            ) cvs show
+
+gsave fill grestore stroke
+showpage

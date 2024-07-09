@@ -1,0 +1,62 @@
+%!PS-PDF-1.4
+%Informática Gráfica - Práctica 1
+%Manuel Diaz Castro
+
+28.346 28.346 scale
+10.45 14.85 translate
+/grid {0.5 0.3 0 0 setcmykcolor
+gsave
+3 28.35 div setlinewidth
+28.346 0 moveto 0 0 lineto 0 28.346 lineto stroke
+-28.346 0 moveto 0 0 lineto 0 -28.346 lineto stroke
+grestore
+gsave
+1 28.35 div setlinewidth
+15 {0 1 moveto 14 1 lineto stroke 0 1 translate} repeat
+grestore
+gsave
+1 28.35 div setlinewidth
+10 {1 0 moveto 1 16 lineto stroke 1 0 translate} repeat
+grestore
+gsave
+1 28.35 div setlinewidth
+10 {1 0 moveto 1 -16 lineto stroke 1 0 translate} repeat
+grestore
+gsave
+1 28.35 div setlinewidth
+15 {0 1 moveto -14 1 lineto stroke 0 1 translate} repeat
+grestore
+gsave
+1 28.35 div setlinewidth
+10 {-1 0 moveto -1 16 lineto stroke -1 0 translate} repeat
+grestore
+gsave
+1 28.35 div setlinewidth
+15 {0 -1 moveto 14 -1 lineto stroke 0 -1 translate} repeat
+grestore
+gsave
+1 28.35 div setlinewidth
+15 {0 -1 moveto -14 -1 lineto stroke 0 -1 translate} repeat
+stroke
+grestore
+gsave
+1 28.35 div setlinewidth
+10 {-1 0 moveto -1 -16 lineto stroke -1 0 translate} repeat
+grestore
+gsave
+/tekst 3 string def /Helvetica findfont 0.5 scalefont setfont
+0 1 14 { /y exch def 0 y 0 sub moveto y tekst cvs show } for
+-1 -1 -14 { /z exch def 0 z 0 sub moveto z tekst cvs show } for
+1 1 10 { /x exch def x 0 moveto x tekst cvs show } for
+-1 -1 -10 { /x exch def x 0 moveto x tekst cvs show } for
+grestore
+0 setgray } bind def
+grid
+1 28.35 div setlinewidth
+newpath
+0 0 moveto
+-2.5 0 lineto
+0 5 lineto
+2.5 0 lineto
+0 0 lineto
+stroke

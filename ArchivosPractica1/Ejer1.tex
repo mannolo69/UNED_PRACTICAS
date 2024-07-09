@@ -1,0 +1,442 @@
+\documentclass{article}
+\usepackage{amsmath} % for the equation* environment
+\usepackage[spanish]{babel}
+\usepackage{datetime}
+\usepackage{parskip}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{lineno}
+%\usepackage[latin1]{inputenc}
+\title{Práctica 1 }
+\author{Manuel Díaz Castro}
+\date{04 de Marzo de 2024}
+\setlength{\parindent}{0.5cm}
+\graphicspath{ {C:/Users/manue/Pictures/ImagenesLatex/} }
+\begin{document}
+\maketitle
+\section*{Ejercicio 1}
+\noindent Calcula como debes cambiar la escala para trabajar en una hoja
+con la unidad en cm.
+Para poder cambiar la escala en una hoja tenemos que utiizar el comando \emph{scala},
+ con los valores en \textsl{Notación Polaca Inversa (RPN)}. Por ejemplo para cambiar la escala a pulgadas tenemos que
+ escribir \emph{72 72 scale} ya que como nos explica el libro de texto de la asignatura donde nos dice que la unidad de medida por
+  defecto es el punto Adobe. El punto Adobe
+ tiene una medida exacta respecto las pulgadas inglesas, inch (se expresan
+ con \emph{"}) que es ésta:
+\[1 Adobe point = 1/72 \hspace{0.1cm} inch.\]
+\begin{quote}    
+ Si tenemos que encontrar la relación que existe entre un centímetro y 
+ una pulgada, lo podemos lograr realizando la división del factor de la escala de punto Adobe
+  en pulgadas entre el factor de escala de pulgadas a centímetros.
+    \[ 72 \div 2,54 = 28,34645669 \]
+    Este resultado que por aproximación establecemos en 28,35 es el factor de escala que necesitamos para 
+    cambiar la escala de punto Adobe a centímetros.
+\end{quote}
+¿Que dimensión tiene un folio \emph{A4} en puntos \emph{Adobe}?
+\indent Para poder calcular la dimensión de un folio \emph{A4} 
+en puntos \emph{Adobe} tenemos que saber que la dimensión de un folio \emph{A4}
+ es de 210x297 mm.
+ \begin{quote}
+    Si queremos saber la dimensión de un folio \emph{A4} 
+    en puntos \emph{Adobe} tenemos que realizar la siguiente operación:
+    \[ 210 \times 28,35 = 595,5 \]
+    \[ 297 \times 28,35 = 841,5 \]
+    Donde podemos ver que se realiza la operación de multiplicar 
+    las dimensiones de un folio \emph{A4} en milímetros por el factor de escala 
+    que hemos determinado en la respuesta anterior.\\
+    Por lo tanto la dimensión de un folio \emph{A4} en puntos \emph{Adobe} es de 595,5x841,5.
+ \end{quote}
+
+\noindent¿Y un \emph{A3}?
+\indent Para poder calcular la dimensión de un folio \emph{A3} en puntos \emph{Adobe} tenemos que saber que la dimensión de un folio \emph{A3}
+ es de 297x420 mm.
+ \begin{quote}
+    Si queremos saber la dimensión de un folio \emph{A3} 
+    en puntos \emph{Adobe} tenemos que realizar la misma operación que hemos precisado 
+    anteriormente:
+    \[ 297 \times 28,35 = 841,5 \]
+    \[ 420 \times 28,35 = 1190,5 \]
+    Por lo tanto la dimensión de un folio \emph{A3} 
+    en puntos \emph{Adobe} es de 841,5x1190,5.
+ \end{quote}
+
+ \section*{Ejercicio 7}
+ Demuestra que la cantidad $\frac{-C}{\sqrt{A^2+B^2}}$
+  es la distancia con signo desde
+ la recta $Ax + By = 0$ a la recta $Ax + By + C = 0$.
+ Sugerencia: Mira el dibujo y calcula la distancia con signo s de
+ la proyección de \emph{u} sobre $[A, B]$
+   \begin{figure}[h]
+      \centering
+      \includegraphics[width=0.5\textwidth]{ejer6}
+      \caption{Dibujo del ejercicio 6}
+      \label{fig:ejercicio6}
+   \end{figure}
+\begin{quote}
+   Para entender por qué la expresión \(\frac{-C}{\sqrt{A^2 + B^2}}\) 
+   representa la distancia con signo de la línea \(Ax + By + C = 0\) 
+   de la línea \(Ax + By = 0\), podemos utilizar el concepto de proyecciones 
+   y considerar la distancia perpendicular entre las dos líneas.
+   
+   Primero, observemos que la línea \(Ax + By = 0\)
+    es simplemente la misma línea \(Ax + By + 0 = 0\), 
+    pero que pasa a través del origen $(0,0)$ y no hay distancia $C$. 
+    Entonces, la distancia entre estas dos líneas es básicamente 
+    la distancia entre la línea \(Ax + By + C = 0\) y el origen.
+   
+   Para encontrar esta distancia, podemos proyectar el vector 
+   que une un punto \textcolor{red}{$P$} en la línea \(Ax + By + C = 0\)  
+   sobre el vector perpendicular de la línea \(Ax + By = 0\) que pasa
+   por la línea  \(Ax + By + C = 0 \) que es \([A, B]\), que nos calculará la 
+   distancia \textcolor{green}{$s$} entre ambas líneas .
+   
+   La proyección del vector \([A, B]\) sobre sí mismo es su magnitud:
+   
+   \[||[A, B]|| = \sqrt{A^2 + B^2}\]
+   
+   La proyección del vector en el punto sobre la línea \(Ax + By + C = 0\) 
+   sobre el vector normal \([A, B]\) es el producto escalar (punto) 
+   entre los dos vectores, dividido por la magnitud de \([A, B]\):
+   
+   \[\frac{-C \bullet [A, B]}{\sqrt{A^2 + B^2}} = \frac{-C}{\sqrt{A^2 + B^2}}\]
+   
+   Dado que esta es la proyección del vector \textcolor{red}{$\vec{u}$} 
+   sobre el vector \([A, B]\), 
+   que es la distancia con signo entre la línea \(Ax + By + C = 0\)
+    y el origen, se observa que \(\frac{-C}{\sqrt{A^2 + B^2}}\) 
+    representa la distancia con signo entre las dos líneas.
+
+   Para poder comprender porqué hablamos de signo en esta distancia entre las
+   dos líneas consideradas, hemos de observar que
+   la longitud con signo en valor absoluto equivale a la longitud 
+   de \emph{\textcolor{green}{s}} en el dibujo
+     y es positiva cuando la proyección coincide con
+la dirección $[A,B]$, y negativa cuando se proyecta en sentido contrario.
+ Queda perfectamente determinada mediante:
+ $s = \vec{|[A,B]|} \cos (\alpha )$.
+
+Ahora bien si ponemos $\cos(\alpha)$ en función del vector [A,B] que denominaremos 
+para el desarrollo de la explicación como un vector $\vec{v}$ y el vector $\vec{u}$  tenemos:
+$$s = \vec{|u|} \cos (\alpha ) = \vec{|u|}\frac{\vec{u}
+ \bullet \vec{v}}{\vec{|u|} \vec{|v|}} = \frac{ax + by}{\vec{|v|}}$$
+
+ Y según la explicación de la asignatura ahora 
+ podemos poner a \textcolor{green}{$s$} en función de [A,B] como 
+\[ s = \frac{{s \mathbf{v}}}{{\|\mathbf{v}\|}} 
+= \frac{{x\mathbf{a} + y\mathbf{b}}}{{\|\mathbf{v}\|}} 
+= \frac{{x\mathbf{a} + y\mathbf{b}}}{{\|\mathbf{v}\|^2}}[a, b] \]
+
+Para determinar el signo de la distancia hemos de saber si el ángulo ($\theta$) es agudo, 
+obtuso o recto. Si el ángulo ($\theta$) es agudo, la proyección es positiva,
+ si el ángulo ($\theta$) es obtuso, 
+la proyección es negativa y si el ángulo ($\theta$) es recto, la proyección es cero. Para saber 
+si el ángulo ($\theta$) es agudo, obtuso o recto, 
+hemos visto que se debe utilizar el producto escalar 
+de los vectores $\vec{u}$ y $\vec{v}$, que está definido
+como el producto de los módulos de ambos vectores por el coseno del 
+ángulo menor ($\theta$)
+que forman sus direcciones, por lo que siempre tendremos en cuenta a $\pi$ como 
+máxima medida del ángulo mediante $cos(\pi - \theta)$.
+  
+\end{quote} 
+
+
+   \noindent Por ejemplo en el dibujo que nos consulta el problema, vemos que 
+   la proyección del vector $\vec{u}$ $(6,2)$
+    sobre el vector [A,B] $(6,8)$ al que denominaremos $\vec{v}$ se puede calcular 
+   utilizando la fórmula de la proyección escalar vista anteriormente,
+    que es:
+
+   $$\text{proy}_{\mathbf{v}} \mathbf{u} = \frac{\mathbf{u} \bullet \mathbf{v}}{\|\mathbf{v}\|^2} \mathbf{v}$$
+   
+
+   Donde:
+
+    --- $\vec{u}$ y $\vec{v}$ son los vectores.
+
+    --- $\vec{u} \bullet \vec{v}$ es el producto escalar de $\vec{u}$ y $\vec{v}$.
+
+    --- $\vec{|v^2|}$ es el cuadrado de la magnitud (o longitud) 
+   del vector $\vec{v}$.
+   
+   Primero, calculamos el producto escalar de $\vec{u}$ y $\vec{v}$:
+   
+   $$\mathbf{u} \bullet \mathbf{v} = u_1 \bullet v_1 + u_2 \bullet v_2 = 6 \bullet 6 + 2 \bullet 8 = 36 + 16 = 52$$
+   
+   Luego, calculamos el cuadrado de la magnitud del vector $\vec{v}$
+   
+   $$\|\mathbf{v}\|^2 = v_1^2 + v_2^2 = 6^2 + 8^2 = 36 + 64 = 100$$
+   
+   Finalmente, sustituimos estos valores en la fórmula de la proyección para obtener el vector de proyección:
+   
+   $$\text{proy}_{\mathbf{v}} \mathbf{u} = 
+   \frac{52}{100} \mathbf{v} = \left(\frac{52}{100} \cdot 6, \frac{52}{100} \cdot 8\right) = (3.12, 4.16)$$
+   
+   Por lo tanto, la proyección del vector $\vec{u} = (6,2)$ sobre el
+    vector $\vec{v}= (6,8)$ es aproximadamente (3.12 , 4.16).
+     \begin{figure*}[h]
+      \centering
+      \includegraphics[width=0.5\textwidth]{proyeccion2}
+      \caption{Proyección del vector}
+      \label{fig:ejercicio6_2}
+     \end{figure*}
+      \begin{quote}
+         Que nos da el punto de intersección del segmento \textcolor{red}{$\vec{v}$} con signo \emph{$+$}
+         o \emph{$-$} según que el ángulo $\theta$ sea agudo u obtuso, que en este caso 
+         al observar el dibujo del problema será agudo (Figura 2) y la distancia será un valor positivo.
+      \end{quote}
+    
+
+
+
+ \section*{Ejercicio 8}
+ Dada la línea (recta) $Ax + By + C = 0$ y un punto $P$,
+  encuentra en Internet o en un libro de geometria analítica
+   la formula para la proyección perpendicular de P en la línea. 
+   Pon un ejemplo.
+
+   \noindent La fórmula para encontrar la proyección perpendicular de un punto $ P $ 
+   en una línea $ Ax + By + C = 0 $ en geometría analítica es la siguiente:
+
+   
+
+Dado el punto $ P(x_0, y_0) $, la proyección perpendicular $ Q $ de $ P $ en la línea se puede encontrar de la siguiente manera:
+\begin{quote}
+1. Calculamos la pendiente de la recta perpendicular a la línea dada. 
+La pendiente de una recta perpendicular es el negativo del inverso 
+de la pendiente de la línea dada. 
+Entonces, la pendiente de la recta perpendicular es $ -\frac{B}{A} $.
+
+2. Utilizamos la ecuación punto-pendiente para encontrar la ecuación de la recta
+ perpendicular que pasa por el punto $ P(x_0, y_0) $. 
+ La ecuación punto-pendiente es $ y - y_0 = m(x - x_0) $, 
+ donde $ m $ es la pendiente de la recta. 
+ Sustituye $ m = -\frac{B}{A} $ y también $ (x_0, y_0) $ por las coordenadas del punto $ P $.
+
+3. Resuelvemos finalmente el sistema de ecuaciones formado por la ecuación
+ de la línea original y la ecuación de la recta perpendicular 
+ para encontrar las coordenadas del punto de intersección $ Q $.
+  Esto se puede hacer sustituyendo la ecuación de la recta perpendicular
+   en la ecuación de la línea original y resolviendo para $ x $ y $ y $.
+\end{quote}
+Por ejemplo, consideremos la línea $ 2x + 3y - 6 = 0 $ y el punto $ P(4, 2) $.
+\begin{quote}
+\begin{enumerate}
+\item  La pendiente de la recta perpendicular es $-\frac{B}{A} = -\frac{3}{2}$.
+\item  La ecuación de la recta perpendicular es $ y - 2 = -\frac{3}{2}(x - 4) $.
+\item Sustituyendo la ecuación de la recta perpendicular en la ecuación de la línea original, obtenemos:
+\begin{equation} \label{eu_eqn}
+2x + 3\left(-\frac{3}{2}(x - 4) + 2\right) - 6 = 0
+\end{equation}
+\end{enumerate}
+\end{quote}
+Resolviendo esta ecuación, encontramos las coordenadas del punto de intersección $ Q $, que es la proyección perpendicular de $ P $ en la línea.
+\begin{quote}
+la ecuación que obtuvimos al sustituir la ecuación de la recta perpendicular
+ en la ecuación de la línea original:
+
+\[ 2x + 3\left(-\frac{3}{2}(x - 4) + 2\right) - 6 = 0\;\;\;\;(\ref{eu_eqn}) \] 
+
+\noindent Se resuelve de la siguiente manera:\\
+Primero, distribuyamos el término \(3\) dentro del paréntesis:
+\begin{align*}
+ &2x + 3\left(-\frac{3}{2}x + 6 - 6\right) - 6 = 0\\ 
+ &2x + 3\left(-\frac{3}{2}x\right) - 6 = 0\\
+ &2x - \frac{9}{2}x - 6 = 0
+\end{align*}
+
+Ahora, combinamos términos semejantes:
+\begin{align*}
+ &\left(2 - \frac{9}{2}\right)x - 6 = 0\\
+ &\left(\frac{4}{2} - \frac{9}{2}\right)x - 6 = 0\\
+ &\;\;\left(\frac{-5}{2}\right)x - 6 = 0\\
+ &\;\;\;\;\;\;\frac{-5x}{2} - 6 = 0
+\end{align*}
+Para despejar \(x\), sumamos \(6\) a ambos lados de la ecuación:
+
+\[ \frac{-5x}{2} = 6 \]
+
+Para eliminar el denominador \(2\) en \(x\), multiplicamos ambos lados de la ecuación por \(2\):
+
+\[ -5x = 12 \]
+
+Finalmente, para obtener \(x\), dividimos ambos lados de la ecuación por \(-5\):
+
+\[ x = \frac{12}{-5} \]
+
+\[ x = -\frac{12}{5} \]
+
+Ahora que hemos encontrado el valor de \(x\), 
+podemos usarlo para encontrar el valor de \(y\) 
+sustituyendo en la ecuación de la recta perpendicular.
+ Luego, las coordenadas del punto intersección \(Q\)
+  serán \((- \frac{12}{5}, \frac{14}{5})\).
+\end{quote} 
+\section*{Ejercicio 9}
+Dadas dos rectas $A1x + B1y + C1 = 0$ y $A2x + B2y + C2 = 0$
+encuentra una formula para el punto de interseccion.
+
+\noindent La fórmula para encontrar el punto de intersección 
+de dos rectas en el plano:
+
+Dadas las ecuaciones de las rectas:
+\begin{quote}
+%\begin{enumerate} 
+   \newcounter{enumTemp}
+   \newenvironment{enumTemp}[1][]{\refstepcounter{enumTemp}\par\medskip
+   \noindent\textbf{Ecuacion~\theenumTemp. #1} \rmfamily}{\medskip}
+   \begin{enumTemp}
+   \(A_1x + B_1y + C_1 = 0\) \label{1}
+   \end{enumTemp}
+   \begin{enumTemp}
+   \(A_2x + B_2y + C_2 = 0\) \label{2}
+   \end{enumTemp}
+%\end{enumerate}
+\end{quote}
+
+El punto de intersección \( (x, y) \) puede ser encontrado 
+usando las siguientes fórmulas:
+\begin{equation}
+x = \frac{{B_1C_2 - B_2C_1}}{{A_1B_2 - A_2B_1}}
+\end{equation}
+\begin{equation} 
+y = \frac{{A_2C_1 - A_1C_2}}{{A_1B_2 - A_2B_1}}
+\end{equation}
+
+Estas dos fórmulas son el resultado de resolver el sistema formado
+ por las ecuaciones de las rectas. Sustituyendo \( x \) 
+ en cualquiera de las ecuaciones de las rectas, obtenemos \( y \), 
+ y viceversa. 
+ 
+1. Despejamos \( y \) en términos de \( x \) en cada ecuación 
+(\ref{1})\,(\ref{2}):
+
+   Para la primera ecuación:
+   \[ B_1y = -A_1x - C_1 \]
+   \[ y = \frac{{-A_1x - C_1}}{{B_1}} \]
+
+   Para la segunda ecuación:
+   \[ B_2y = -A_2x - C_2 \]
+   \[ y = \frac{{-A_2x - C_2}}{{B_2}} \]
+
+2. Igualamos las dos expresiones para \( y \):
+
+   \[ \frac{{-A_1x - C_1}}{{B_1}} = \frac{{-A_2x - C_2}}{{B_2}} \]
+
+3. resolveremos esta ecuación para encontrar \( x \) y 
+una vez que tenemos \( x \), podemos encontrar \( y \) sustituyendo \( x \) 
+en cualquiera de las ecuaciones de las rectas.
+
+4. Una vez que hemos encontrado \( x \) e \( y \),
+ estas coordenadas formarán el punto de intersección de las dos rectas.
+
+Debemos tener cuidado con los casos en los que las rectas
+ pueden ser paralelas o coincidentes,
+  ya que en esos casos no habrá un punto de intersección o no será único.
+
+\section*{Ejercicio 10}
+Dados dos puntos P y Q, encuentra la ecuacion de la recta que
+los contiene.
+
+\noindent La fórmula para encontrar la ecuación de la recta 
+que contiene dos puntos \( P(x_1, y_1) \) y \( Q(x_2, y_2) \) 
+en el plano es utilizando la fórmula de la pendiente-intersección
+ la siguiente:
+
+La ecuación de la recta en su forma más común es 
+la forma pendiente-intersección:
+
+\[ y = mx + b \]
+
+Donde:
+\begin{quote}
+   - \( m \) es la pendiente de la recta.
+
+   -   \( b \) es la intersección en \( y \), 
+   es decir, el valor de \( y \) cuando \( x = 0 \), 
+   también conocido como la ordenada al origen.
+\end{quote}
+
+La pendiente \( m \) de la recta se puede calcular utilizando 
+la fórmula de la pendiente, que compara el cambio en \( y \) 
+con el cambio en \( x \) entre dos puntos en la recta. 
+Si tenemos dos puntos \( P(x_1, y_1) \) y \( Q(x_2, y_2) \), 
+la fórmula de la pendiente es:
+
+\[ m = \frac{{y_2 - y_1}}{{x_2 - x_1}} \]
+
+Una vez que hemos calculado la pendiente \( m \), 
+podemos usar cualquiera de los dos puntos \( P \) o \( Q \)
+ para encontrar el valor \( b \) de la intersección en \( y \).
+  Esto se puede hacer sustituyendo las coordenadas \( x \) e \( y \) 
+  de uno de los puntos en la ecuación de la recta:
+
+\[ y_1 = mx_1 + b \]
+
+Luego, despejamos \( b \) para encontrar su valor.
+
+Una vez que hemos encontrado \( m \) y \( b \), 
+podemos escribir la ecuación de la recta que pasa por
+ los puntos \( P \) y \( Q \).
+
+
+\section*{Ejercicio 11}
+Una función afín $f(x, y) = Ax + By + C$ vale $-4$ en el punto
+$(0, 0)$ y $7$ en el punto $(1, 2)$.
+
+$$\,\,\,\;\,f(0, 0) = -4$$
+$$f(1, 2) = 7$$
+En que punto del segmento entre los puntos anteriores tenemos
+$f(x, y) = 0$?
+
+\noindent Para encontrar el punto en el segmento entre los puntos dados donde la función $f(x, y)$ es igual a $0$, podemos usar la ecuación de la función afín y resolver para $x$ e $y$.
+
+Dado que la función afín es $f(x, y) = Ax + By + C$, podemos utilizar los puntos dados $(0, 0)$ y $(1, 2)$ para formar un sistema de ecuaciones.
+
+Para $(0, 0)$:
+\[f(0, 0) = -4 = A(0) + B(0) + C\]
+\[C = -4\]
+
+Para $(1, 2)$:
+\[f(1, 2) = 7 = A(1) + B(2) - 4\]
+\[A + 2B = 11\]
+
+Entonces, tenemos el sistema de ecuaciones:
+\[\begin{cases} A + 2B = 11 \\ C = -4 \end{cases}\]
+
+Resolviendo el sistema con unos valores que lo cumplan, obtenemos los valores de $A$, $B$ y $C$:
+\[A = 3, \quad B = 4, \quad C = -4\]
+
+La función afín se convierte en:
+\[f(x, y) = 3x + 4y - 4\]
+
+Para encontrar el punto en el que $f(x, y) = 0$, sustituimos en la ecuación y resolvemos:
+\[3x + 4y - 4 = 0\]
+\[3x + 4y = 4\]
+
+Ahora, para encontrar el punto $(x, y)$ en el segmento entre $(0, 0)$ y $(1, 2)$ donde $f(x, y) = 0$, podemos usar la ecuación paramétrica de la línea que pasa por los dos puntos.
+
+La ecuación paramétrica de una línea que pasa por dos puntos $(x_1, y_1)$ y $(x_2, y_2)$ es:
+\[x = x_1 + t(x_2 - x_1)\]
+\[y = y_1 + t(y_2 - y_1)\]
+
+Donde $t$ es un parámetro que varía de $0$ a $1$.
+
+Sustituyendo los puntos dados:
+\[x = 0 + t(1 - 0) = t\]
+\[y = 0 + t(2 - 0) = 2t\]
+
+Sustituimos estas expresiones en la ecuación de $f(x, y)$:
+\[3(t) + 4(2t) - 4 = 0\]
+\[3t + 8t - 4 = 0\]
+\[11t - 4 = 0\]
+\[11t = 4\]
+\[t = \frac{4}{11}\]
+
+Por lo tanto, el punto donde $f(x, y) = 0$ 
+en el segmento entre $(0, 0)$ y $(1, 2)$ es $(\frac{4}{11}, \frac{8}{11})\equiv$ (0.36 , 0.72).
+
+
+
+
+\end{document}

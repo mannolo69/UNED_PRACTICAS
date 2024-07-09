@@ -1,0 +1,65 @@
+%!PS-Adobe-3.0
+%Informática Gráfica - Práctica 1
+%Manuel Diaz Castro
+
+%4.	Utilizando solo la función atan, encuentra como podríamos calcular asin (0.4).
+%Esto es, queremos calcular el ángulo φ cuyo seno es 0.4 (sin(φ) = 0,4).
+28.35 28.35 scale
+/cuadrado
+{
+gsave
+1 28.35 div setlinewidth
+newpath
+0 0 moveto
+0 29.7 lineto
+20.95 29.7 lineto
+20.95 0 lineto
+closepath
+stroke
+grestore
+} def
+
+
+
+/Arial findfont
+0.7 scalefont setfont
+
+cuadrado
+newpath
+0.1 27.7 moveto
+(Ejercicio 4.) show
+0.3 26.7 moveto
+(Utilizando solo la funcion atan, encuentra \n) show
+0.3 25.7 moveto
+(como podriamos calcular asin (0.4)\n) show
+0.3 24.7 moveto
+(Esto es, queremos calcular\n) show
+0.3 23.7 moveto
+(el angulo cuyo seno es 0.4 (seno(angulo) = 0,4).) show
+1.0 21.7 moveto
+(Para ello, podemos usar la identidad trigonometrica que) show
+1.0 20.7 moveto
+(relaciona funcion arcoseno con funcion arcotangente) show
+1.0 19.7 moveto
+(asin(x) = atan(x/sqrt(1-x^2)) ) show
+
+
+newpath
+1.5 17.7 moveto
+(Aplicando la funcion atan x=0.4, resulta el angulo = ) show
+
+0.4
+1
+0.4 2 exp
+%0.4 0.4 mul
+sub
+sqrt
+%div
+atan
+(            ) cvs show
+1.5 16.7 moveto
+(23.5782 es el valor de arcoseno de 0.4 y la solucion) show
+newpath
+
+gsave fill grestore stroke
+showpage
