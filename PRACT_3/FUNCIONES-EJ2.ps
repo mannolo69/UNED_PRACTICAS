@@ -1,0 +1,110 @@
+%!PS-ADOBE-3.0
+%Informatica Grafica-PARCTICA 3
+%MANUEL DIAZ CASTRO
+
+%Utilizando la idea de la seccion 5.4 dibuja las siguientes funciones:
+%a) f(x) = x^3 − 4x
+%b) f(x) = cos(x)
+%¡Cuidado! Recuerda que el argumento del operador cos en PostScript son angulos en grados.
+
+/ppi 72 def  %Define la resolución en puntos por pulgada (72 ppi)
+/paper_width 21 def %Define el ancho del papel en pulgadas (21 pulgadas)
+/paper_height 29.7 def %Define la altura del papel en pulgadas (29.7 pulgadas)
+/dx paper_width 2 div def %Calcula la mitad del ancho y alto del papel
+/dy paper_height 2 div def
+/escala_cm 1 2.54 div ppi mul def %Calcula el factor de escala para convertir centímetros a píxeles
+/pi 3.14159 def %Define el valor de pi.
+/degreeScale 180 pi div def % factor conversión radianes -> grados
+/Helvetica findfont %fuente de letra
+0.5 scalefont setfont %tamaño letra
+
+% marco
+escala_cm dup scale
+1 escala_cm div setlinewidth
+dx dy translate
+
+% constantes
+/N 1000 def % puntos
+/dx paper_width N div def % diferencial en x de punto.
+                        %21/1000=0.021 debe ser la amplitud del renderizado en x
+                        %La idea es que a mayor número de puntos (N), menor será el diferencial dx,
+                        %lo que permite un renderizado más preciso del grafico.
+/functionA {
+    1 dict begin
+    /x exch def
+    %x^3 - 4x
+    x x x mul mul 4 x mul sub
+  %duplico tres veces el valor de x,
+  %para realizar una multiplicacion para calcular x^3.
+  %Esto se logra al duplicar x tres veces,
+  %lo que hago en x,x,x, y luego multiplicar los tres valores
+  %(usando mul mul) para obtener x×x×x, que es x^3
+        %%%4 x mul sub:
+        %En este paso con los valores de la pila 4 x hago 4x y
+        %acabo la funcion x^3-4x con sub (resta).
+    end
+} def
+
+/functionB {
+    1 dict begin
+    /x exch def
+    %cos(x)
+    x x degreeScale mul cos %x degreeScale mul convierte x de radianes a grados
+                            %antes de calcular el coseno.
+    end
+} def
+
+% ejes cartesianos % todo el ancho y todo el largo.
+newpath
+paper_width neg 2 div 0 moveto
+paper_width 2 div 0 lineto
+closepath
+stroke
+
+newpath
+0 paper_height neg 2 div moveto
+0 paper_height 2 div lineto
+closepath
+stroke
+
+
+% a
+1 0 0 setrgbcolor %se establece el color en rojo
+/x paper_width neg 2 div def %valor inicial de x = (-21/2) = (-10.5,
+                             %del centro del eje de coordenadas en cms
+newpath
+x dup functionA moveto %Se mueve al primer punto de la función
+N { % renderizar f dx a lo largo de todos los diferenciales
+    /x x dx add def     %Tiene que repetir N veces el siguiente proceso:
+                        %Se incrementa x por el diferencial dx.
+    x x functionA lineto  %Se calcula el valor de f(x)=x^3−4x con x functionA
+                          %Esto crea un conjunto de segmentos de línea que representan la funcion
+                          %con los dos puntos (x,f(x))
+} repeat
+stroke
+
+% b
+0 0 1 setrgbcolor %se establece el color en azul
+/x paper_width neg 2 div def %valor inicial de x = (-21/2) = (-10.5,
+newpath
+x dup functionB moveto %Se mueve al primer punto de la función
+N {
+    /x x dx add def    %Luego, se repite N veces el siguiente proceso:
+                       %Se incrementa x por el diferencial dx.
+    x x functionB lineto  %Se calcula el valor de f(x)=cos(x) con x functionB
+                          %Esto crea un conjunto de segmentos de linea que representan la funcion.
+} repeat
+stroke
+%pintamos en pantalla la leyenda de las funciones representadas
+newpath
+0 0 0 setrgbcolor
+4 5 moveto (Ejer2-Dibuja las funciones:)show
+1 0 0 setrgbcolor
+4 4 moveto
+(a\051 Funcion f(x) = x^3 - 4x) show
+0 0 1 setrgbcolor
+4 3.2 moveto
+(b\051 Funcion f(x) = cos(x)) show
+closepath
+stroke
+showpage

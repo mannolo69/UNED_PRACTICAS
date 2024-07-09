@@ -1,0 +1,125 @@
+%!PS-PDF-3.0
+%Informatica Grafica - Practica 3
+%Manuel diaz Castro
+
+%6. Implementa el algoritmo Hodgman-Sutherlan tal como viene en la sección 5.6.
+
+%Procedimiento que calcula Ax + By + C dado [A B C] y [x y]
+/evaluate { %x y [A B C]
+    aload pop %x y A B C
+    5 1 roll  %C x y A B
+    3 2 roll  %C x A B y
+    mul       %C x A By
+    3 1 roll %C By x A
+    mul    %C By Ax
+    add add %Ax+By+C
+} def
+
+%Procedimiento que calcula el polígono truncado por Ax + By + C <= 0
+/hodgman-sutherland {4 dict begin
+/f exch def %0 3 2
+/p exch def %[-4 0][4 0][4 4][-4 4]
+/n p length def %4
+/P p n 1 sub get def %P=p[n-1] para iniciar
+/d P length 1 sub def %1
+/fP P aload pop f evaluate def %-4 4 (0 3 2) parametros evaluar
+[
+    p { %para todos los elementos de array p
+        /Q exch def
+        /fQ Q aload pop f evaluate def
+        fP 0 le {
+            fQ 0 le {
+                Q % P <= 0, Q <= 0: suma Q
+            }{ % P <= 0, Q > 0
+                fP 0 lt { %IF p< 0. anyadir interseccion
+                    /QP fQ fP sub def
+                        [
+                            fQ P 0 get mul fP Q 0 get mul sub QP div
+                            fQ P 1 get mul fP Q 1 get mul sub QP div
+                        ]
+                    } if
+                } ifelse
+            }{ %P > 0
+                fQ 0 le { % P > 0, Q <= 0: IF fQ < 0, anyadir interseccion;
+                            % anyadir Q en cualquier otro caso
+                    fQ 0 lt {
+                        /QP fQ fP sub def
+                        [
+                            fQ P 0 get mul fP Q 0 get mul sub QP div
+                            fQ P 1 get mul fP Q 1 get mul sub QP div
+                        ]
+                    } if
+                    Q
+                } if
+                % else P > 0, Q > 0: no hacer nada
+            } ifelse
+            /P Q def
+           /fP fQ def
+        }forall
+    ]
+end} def
+
+%Procedimiento para dibujar el polígono
+/make-polygon {3 dict begin
+/a exch def
+/n a length def
+n 1 gt {
+    a 0 get 0 get
+    a 0 get 1 get
+    moveto
+    1 1 n 1 sub {
+        /i exch def
+        a i get 0 get
+        a i get 1 get
+        lineto
+    } for
+} if
+end} def
+
+%Ejemplo introduciendo como argumento un cuadrado cortado por la recta 3x + 2y
+/Arial findfont
+0.5 scalefont setfont
+
+28.35 28.35 scale
+1 25 div setlinewidth
+1 28 moveto
+gsave
+1 0 0 setrgbcolor
+(Implementa el algoritmo Hodgman-Sutherlan tal como viene en la seccion 5.6)show
+grestore
+gsave
+2 26.7 moveto(Cuadrado cortado por la recta +3x +2y) show
+newpath
+6 21.7 translate
+[[-4 0][4 0][4 4][-4 4]][3 2 0] hodgman-sutherland make-polygon
+closepath
+stroke
+grestore
+gsave
+2 19.7 moveto(Cuadrado cortado por la recta -2x +4y) show
+newpath
+1 25.7 div setlinewidth
+6 16.7 translate
+[[-4 0][4 0][4 4][-4 4]][-2 4 0] hodgman-sutherland make-polygon
+closepath
+stroke
+grestore
+gsave
+2 14.7 moveto(Cuadrado cortado por la recta +12x -7y ) show
+newpath
+1 25 div setlinewidth
+6 9.7 translate
+[[-4 0][4 0][4 4][-4 4]][12 -7 0] hodgman-sutherland make-polygon
+closepath
+stroke
+grestore
+gsave
+2 7.7 moveto(Cuadrado cortado por la recta -12x -7y ) show
+newpath
+1 25 div setlinewidth
+6 2.7 translate
+[[-4 0][4 0][4 4][-4 4]][-12 -7 0] hodgman-sutherland make-polygon
+closepath
+stroke
+grestore
+showpage

@@ -1,0 +1,120 @@
+%!PS
+%!PS-PDF-3.0
+%Informatica Grafica - Practica 3
+%Manuel diaz Castro
+
+
+%c) Generaliza el procedimiento anterior para dibujar estrellas de un
+%numero impar de puntas.
+
+/ppi 72 def % adobe points per inch
+% centro de la hoja
+/paper_width 21 def
+/paper_height 29.7 def
+/dx paper_width 2 div def
+/dy paper_height 2 div def
+/escala_cm 1 2.54 div ppi mul def
+/pi 3.14159 def
+
+
+% unir los puntos, recibe un array de 0 o más puntos
+% [[x, y]..] -> path
+/connectDots {
+    1 dict begin
+    /dots exch def
+    /actual 0 def
+    /repite 0 def
+    /puntas dots length def %generalizamos las puntas del parametro
+    dots length 1 gt { % al menos 2
+        dots 0 get 0 get dots 0 get 1 get moveto % punto inicial
+        { % bucle de puntos hasta que 2,4,6,8,10 actual(repite(0)=modulo ,2,4,1,3,0
+            /actual actual 2 add def
+            /modulo actual puntas mod def
+            dots modulo get 0 get dots modulo get 1 get lineto % trazar
+            modulo repite eq {exit} if
+        } loop
+    } if
+    end
+} def
+
+/polygonRenderer{
+    2 dict begin
+    /sides exch def
+    /circumference exch def
+    /ratius circumference pi div 2 div def
+
+    sides 5 ge sides 2 mod 0 ne and { % si al menos es pentágono y es de lados impares
+        /segments sides array def % array de segmentos
+        segments 0 [ratius 0] put % punto inicial
+        /angle 360 sides div def % puntos para dibujar el poligono estrellado
+        1 1 sides 1 sub { % lados-1 veces
+            /i exch def
+            segments i [angle cos ratius mul angle sin ratius mul] put % calcular angulos
+            /angle angle 360 sides div add def % nuevo angulo con salto
+           } for
+        % connectDots
+        newpath
+        segments connectDots
+        closepath
+    }if
+    end
+} def
+
+% constante. Ejemplo del libro.
+%/poligono [
+%    [1 0][72 cos 72 sin][144 cos 144 sin][216 cos 216 sin][288 cos 288 sin]
+%] def
+
+% escala y moverse al centro
+escala_cm dup scale
+1 escala_cm div setlinewidth
+dx dy translate
+
+
+
+gsave
+/negro [0 0 0] def
+/p3 [34 5] def % pentagono
+/verde [0 1 0] def
+/p4 [12 7] def % heptagono
+/azul [0 0 1] def
+/p5 [20 11] def % undecagono
+/magenta [1 0 1] def
+
+
+17.5 rotate
+p3 aload pop polygonRenderer %dibujar pentagono
+verde aload pop setrgbcolor
+stroke
+17.5 rotate
+p4 aload pop polygonRenderer %dibujar heptagono
+azul aload pop setrgbcolor
+stroke
+-12.5 rotate
+p5 aload pop polygonRenderer %dibujar undecagono
+magenta aload pop setrgbcolor
+stroke
+grestore
+
+gsave
+/Helvetica findfont
+0.5 scalefont setfont
+1 25 div setlinewidth
+negro aload pop setrgbcolor
+-10 12 moveto (c\051 Generaliza el procedimiento anterior para dibujar estrellas de un)show
+-9 11 moveto (numero impar de puntas.)show
+-5 9 moveto (Dibujar estrellas de un numero impar de puntas)show
+
+verde aload pop setrgbcolor
+-3 8 moveto(Poligono Estrella de 5 puntos) show
+azul aload pop setrgbcolor
+-3 7 moveto(Poligono Estrella de 7 puntos)show
+magenta aload pop setrgbcolor
+-3 6 moveto(dibujar Estrella de 11 puntos)show
+grestore
+
+%newpath
+%poligono connectDots
+%closepath
+%stroke
+showpage

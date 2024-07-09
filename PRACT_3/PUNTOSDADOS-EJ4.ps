@@ -1,0 +1,63 @@
+%!PS-PDF-3.0
+%Informatica Grafica - Practica 3
+%MANUEL DIAZ CASTRO
+
+% Implementa un procedimiento para el dibujo de pol´ıgonos dados la
+%lista de puntos que lo forma: [P1, P2, · · · , Pn].
+
+/ppi 72 def % adobe points per inch
+% centro de la hoja
+/paper_width 21 def
+/paper_height 29.7 def
+/dx paper_width 2 div def
+/dy paper_height 2 div def
+/escala_cm 1 2.54 div ppi mul def
+/pi 3.14159 def
+
+
+% unir los puntos, recibe un array de 0 o más puntos
+% [[x, y]..] -> path
+/connectDots {
+    1 dict begin
+    /dots exch def
+    dots length 1 gt { % al menos 2
+        dots 0 get 0 get dots 0 get 1 get moveto % punto inicial
+        1 1 dots length 1 sub { % puntos - 1 veces
+            /i exch def % iterator
+            dots i get 0 get dots i get 1 get lineto % trazar
+        } for
+    } if
+    end
+} def
+
+% constante. Ejemplo del libro de puntos dados.
+/poligono [
+    [1 0][72 cos 72 sin][144 cos 144 sin][216 cos 216 sin][288 cos 288 sin]
+] def
+
+
+
+% escala y moverse al centro
+escala_cm dup scale
+1 escala_cm div setlinewidth
+dx dy translate
+
+gsave
+/Helvetica findfont
+0.5 scalefont setfont
+1 25 div setlinewidth
+-3.5 4 moveto(Ejer4- Poligono de Puntos Dados) show
+grestore
+
+newpath
+%17.5 rotate
+1 0 0 setrgbcolor
+%dx dy translate
+18 rotate
+3 dup scale
+%dx dy translate
+
+poligono connectDots
+closepath
+stroke
+showpage

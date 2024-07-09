@@ -1,0 +1,54 @@
+%PS-ADOBE-3.0
+%Informatica Grafica - Practica 3
+%MANUEL DIAZ CASTRO
+
+%1. Realiza un procedimiento poligon que dibuje un polígono regular
+%cuyos parámetros sean el número de lados y el diámetro de la circunferencia circunscrita
+%(tamaño polígono).
+/ppi 72 def % adobe points per inch
+% centro de la hoja
+/paper_width 21 def
+/paper_height 29.7 def
+/dx paper_width 2 div def
+/dy paper_height 2 div def
+/escala_cm 1 2.54 div ppi mul def
+/pi 3.14159 def
+
+%Procedimiento que dibuja un polígono regular habiendo recibido como parámetros
+%el número de lados y el diámetro de la circunferencia circunscrita.
+/poligon {4 dict begin
+    aload pop
+/L exch def
+/D exch def
+/A 360 L div def
+/R D 2 div def
+
+R 0 moveto
+L {
+    A cos R mul A sin R mul lineto
+/A A 360 L div add def
+    } repeat
+    closepath
+    end} def
+
+%Ejemplos
+escala_cm dup scale
+1 escala_cm div setlinewidth
+
+
+
+/Arial findfont
+0.5 scalefont setfont
+
+6 24.7 translate
+-5 2.5 moveto(Poligono de 5 lados y 3 centimetros de diametro) show
+[3 5]poligon
+
+0 -8 translate
+-5 3.5 moveto(Poligono de 8 lados y 6 centimetros de diametro) show
+[6 8]poligon
+
+0 -8 translate
+-5 3 moveto(Poligono de 7 lados y 5 centimetros de diametro) show
+[5 7]poligon
+stroke
