@@ -1,0 +1,198 @@
+%!PS-ADOBE-3.0
+% Arguments: m[3][3]
+% Returns inverse of m
+28.35 28.35 scale
+/Helvetica findfont
+0.5 scalefont setfont
+% - matrices in this package are laid out in a single array by columns ---------
+
+% a double array: cannot be empty - just lays out all items
+/to-single-array {
+% [ [. . . ][ . . . ] ] => [ . . . . . . ]
+[
+	exch { % successive rows
+		aload pop
+	} forall
+]
+} def
+
+ gsave
+ newpath
+4.5 17.8 moveto
+(\050)show
+90 rotate
+(    \055\055\055\055\055\055\055\055\055\055\055\055\055\055\055\055\055\055\055\055\055 ) show
+-90 rotate
+ (\050) show
+closepath
+stroke
+grestore
+gsave
+ newpath
+17.5 17.8 moveto
+(\051)show
+90 rotate
+(    \055\055\055\055\055\055\055\055\055\055\055\055\055\055\055\055\055\055\055\055\055 ) show
+-90 rotate
+ (\051) show
+closepath
+stroke
+grestore
+
+newpath
+0 0 0 setrgbcolor
+4 27 moveto(Matriz 3 \052 3, que devuelva su inversa) show
+closepath
+
+/3x3-det {
+1 dict begin
+/m exch def
+
+m 0 get
+m 4 get mul
+m 8 get mul
+
+m 1 get
+m 5 get mul
+m 6 get mul
+add
+
+m 2 get
+m 3 get mul
+m 7 get mul
+add
+
+m 2 get
+m 4 get mul
+m 6 get mul
+sub
+
+m 1 get
+m 3 get mul
+m 8 get mul
+sub
+
+m 0 get
+m 5 get mul
+m 7 get mul
+sub
+
+end
+} def
+
+/3x3-inverse {
+2 dict begin
+/m exch def
+/d m 3x3-det def
+d 0 eq{
+5 20 moveto
+(determinante igual a 0) show
+}{
+[
+   m 4 get m 8 get mul
+   m 5 get m 7 get mul sub
+   d div
+
+
+   m 2 get m 7 get mul
+   m 1 get m 8 get mul sub
+   d div
+
+   m 1 get m 5 get mul
+   m 4 get m 2 get mul sub
+   d div
+
+   m 5 get m 6 get mul
+   m 3 get m 8 get mul sub
+   d div
+
+   m 0 get m 8 get mul
+   m 2 get m 6 get mul sub
+   d div
+
+   m 2 get m 3 get mul
+   m 0 get m 5 get mul sub
+   d div
+
+   m 3 get m 7 get mul
+   m 6 get m 4 get mul sub
+   d div
+
+   m 1 get m 6 get mul
+   m 0 get m 7 get mul sub
+   d div
+
+   m 0 get m 4 get mul
+   m 1 get m 3 get mul sub
+   d div
+]
+printable
+}ifelse
+end
+} def
+/printable { 9 dict begin
+/mimatriz exch def
+    % Extraer los elementos de la matriz de la pila
+    /a mimatriz 0 get def
+        newpath
+        5 22  moveto
+        a
+        (          ) cvs show
+    /b mimatriz 1 get def
+        10 22 moveto
+        b
+        (          ) cvs show
+    /c mimatriz 2 get def
+        15 22 moveto
+        c
+        (          ) cvs show
+        closepath
+
+    /d mimatriz 3 get def
+     5 20 moveto
+        d
+        (          ) cvs show
+    /e mimatriz 4 get def
+    10 20 moveto
+        e
+        (          ) cvs show
+    /f mimatriz 5 get def
+    15 20 moveto
+        f
+        (          ) cvs show
+    /g mimatriz 6 get def
+    5 18 moveto
+        g
+        (          ) cvs show
+    /h mimatriz 7 get def
+    10 18 moveto
+        h
+        (          ) cvs show
+    /i mimatriz 8 get def
+    15 18 moveto
+        i
+        (          ) cvs show
+    stroke
+    end
+    } def
+
+
+gsave
+[[1 2 3] [0 -1 4] [5 6 0]]
+gsave
+ newpath
+4 24 moveto
+([[1 2 3] [0 -1 4] [5 6 0]] = )show
+closepath
+stroke
+grestore
+newpath
+to-single-array
+3x3-inverse
+%to-single-array
+
+closepath
+stroke
+grestore
+
+showpage

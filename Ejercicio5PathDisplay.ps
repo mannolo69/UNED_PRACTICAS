@@ -1,0 +1,72 @@
+%!PS-Adobe-2.0
+%Manuel Diaz Castro
+%Informatica grafica- Practica 4
+
+%Implementa los procedimientos /path-display y /therisacurrentpoint de la seccion
+%6.11 y pruebalo con algun ejemplo.
+/thereisacurrentpoint{
+false
+{ 3 { pop } repeat true exit }
+{ 3 { pop } repeat true exit }
+{ 7 { pop } repeat true exit }
+{ true exit }
+pathforall
+} def
+/start{moveto (moveto) show currentpoint} def
+/line {moveto (lineto) show} def %escribe lineto donde se aplica la instruccion lineto
+/curve{moveto (curveto) show
+/Times-Italic findfont 8 scalefont setfont
+moveto (control point) show
+moveto (control point) show
+/Helvetica-Bold findfont 10 scalefont setfont} def
+/fin {moveto( and closepath) show} def
+/path-display {{start} {line} {curve} {fin} pathforall }def
+/salida {1 dict begin
+booleano true eq {
+(el path esta iniciado: ) show
+(true) show}{(el path esta iniciado: ) show (false) show}ifelse
+end}def
+
+/path {36 36 moveto
+36 144 lineto
+216 72 144 216 252 144 curveto
+72 0 rlineto
+288 72 36 0 270 arcn
+closepath} def
+
+
+150 420 translate
+
+
+/Helvetica-Bold findfont 10 scalefont setfont
+3 setlinewidth 0.3 setgray
+
+gsave
+/Times-Roman findfont
+10 scalefont setfont
+
+newpath
+path-display
+thereisacurrentpoint
+/booleano exch def
+2 270 moveto
+salida
+closepath
+
+path stroke
+0 1 1 setrgbcolor
+0 setgray
+
+
+
+path
+path-display
+thereisacurrentpoint
+/booleano exch def
+gsave
+/Times-Roman findfont
+10 scalefont setfont
+newpath
+1 6 moveto
+salida
+closepath

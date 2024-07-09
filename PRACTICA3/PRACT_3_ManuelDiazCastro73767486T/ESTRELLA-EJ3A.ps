@@ -1,0 +1,100 @@
+%!PS-PDF-3.0
+%Informatica Grafica - Practica 3
+%MANUEL DIAZ CASTRO
+
+%3. Construye un procedimiento para dibujar una estrella de 5 puntas.
+%a) Prueba algunas ideas que se te ocurran.
+
+
+/ppi 72 def % adobe points por inch(pulgada)
+% centro de la hoja
+/paper_width 21 def
+/paper_height 29.7 def
+/dx paper_width 2 div def
+/dy paper_height 2 div def
+/escala_cm 1 2.54 div ppi mul def
+/pi 3.14159 def
+/Helvetica findfont
+0.5 scalefont setfont
+
+% unir los puntos, recibe un array de 0 o más puntos
+% [[x, y]..] -> path
+/connectDots {
+    1 dict begin
+    /dots exch def
+    dots length 1 gt { % al menos 2
+        dots 0 get 0 get dots 0 get 1 get moveto % punto inicial
+        1 1 dots length 1 sub { % puntos-1 veces
+            /i exch def % iterator
+            dots i get 0 get dots i get 1 get lineto % trazar
+        } for
+    } if
+    end
+} def
+
+
+% parametros: circunferencia, caras on stack -> path
+/polygonRenderer{
+    2 dict begin
+    /sides exch def
+    /circumference exch def
+    /ratius circumference pi div 2 div def %radio circunferencia circunscrita
+                                           %mitad de longitud del lado
+    sides 5 ge sides 2 mod 0 ne and { % si al menos es pentágono y es de lados impares
+        /segments sides array def % array de segmentos
+        segments 0 [0 ratius] put % punto inicial en [x=0,y=radio]
+        /angle 360 sides div 2 mul 90 add def %salto del punto para dibujar estrella
+        1 1 sides 1 sub { % lados-1 veces
+            /i exch def
+            segments i [angle cos ratius mul angle sin ratius mul] put %calcula punto y al array
+                        /angle angle 360 sides div 2 mul add def % salto nuevo angulo
+        } for
+        newpath
+        segments connectDots %connectDots para conectar los puntos y dibujar
+        closepath
+    }if
+    end
+} def
+
+% constantes:
+/p1 [20 3] def % triángulo
+/negro [0 0 0] def
+/p2 [55 4] def % cuadrado
+/rojo [1 0 0] def
+/p3 [34 5] def % pentágono
+/verde [0 1 0] def
+/p4 [12 7] def % heptágono
+/azul [0 0 1] def
+/p5 [20 11] def % undecágono
+/magenta [1 0 1] def
+
+% escala y moverse al centro
+escala_cm dup scale
+1 escala_cm div setlinewidth
+dx dy translate
+%Explicacion del ejercicio que voy a dibujar
+gsave
+/Helvetica findfont
+0.5 scalefont setfont
+1 25 div setlinewidth
+negro aload pop setrgbcolor
+-8 8 moveto (Construye un procedimiento para dibujar una estrella de 5 puntas)show
+-8 7 moveto (a\051 Prueba algunas ideas que se te ocurran) show
+grestore
+%Comenzamos las estrellas siempre >5
+p1 aload pop polygonRenderer
+negro aload pop setrgbcolor
+stroke
+p2 aload pop polygonRenderer
+rojo aload pop setrgbcolor
+stroke
+p3 aload pop polygonRenderer
+verde aload pop setrgbcolor
+stroke
+p4 aload pop polygonRenderer
+azul aload pop setrgbcolor
+stroke
+p5 aload pop polygonRenderer
+magenta aload pop setrgbcolor
+stroke
+showpage

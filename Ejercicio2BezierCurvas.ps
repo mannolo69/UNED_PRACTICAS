@@ -1,0 +1,481 @@
+%!PS-Adobe-2.0
+%Manuel Diaz Castro
+%%Page: 1 1
+gsave
+
+72 dup scale
+1 72 div setlinewidth
+
+%title page
+/Times-Roman findfont
+0.6 scalefont
+setfont
+
+0.5 8 moveto
+(Aproximaciones Curvas Bezier) show
+1 7 moveto
+(La cuadrica: y = x^4) show
+
+/Times-Roman findfont
+0.25 scalefont
+setfont
+
+5 2.5 moveto
+(Manuel Diaz) show
+5 2.2 moveto
+(C.A. Calatayud) show
+5 1.9 moveto
+(I.Grafica 2024) show
+5 1.6 moveto
+(U.N.E.D.) show
+5 1.3 moveto
+(Prof. D. Joan A. Mascarell) show
+
+
+grestore
+
+showpage
+%---------------------------------------------------------
+%!
+%%Page: 1 2
+gsave
+72 dup scale
+1 72 div setlinewidth
+/Times-Roman findfont
+0.4 scalefont
+setfont
+newpath
+0.5 10 moveto
+(Curva Bezier 1 segmento \[-1,1\]) show
+
+0.2 9 moveto
+(-1 1 1 -4 \/-0.3 -1.6 \/0.3 -1.6 \/1 1 1 4) show
+closepath
+grestore
+gsave
+newpath
+280 450 translate
+100 100 scale
+
+1 72 div setlinewidth
+
+% x -> x^{4}
+
+/f {
+dup mul dup mul
+} def
+
+% x -> 4x^{3}
+
+/df {
+dup dup mul mul 4 mul
+} def
+
+/pwd 0.050 def
+
+/pixel {
+gsave
+setgray
+newpath
+moveto
+pwd 2 div neg pwd 2 div neg rmoveto
+pwd 0 rlineto
+0 pwd rlineto
+pwd neg 0 rlineto
+0 pwd neg rlineto
+gsave
+fill
+grestore
+0 setgray
+stroke
+grestore
+} def
+
+% Pila(stack): N x0 x1
+
+/drawcurve {
+/N exch def
+/x1 exch def
+/x0 exch def
+
+/h x1 x0 sub N div def
+
+newpath
+x0 dup f moveto
+N {						% x y = currentpoint
+currentpoint
+
+2 copy 0 pixel
+
+exch					% y x
+dup 					% y x x
+df						% y x (dy/dx)-->x -> 4x^{3}
+exch					% y (dy/dx x)
+h 0.3333 mul add 		% y dy/dx x1 -->/h x1 x0 sub N div def
+3 1 roll				% x1 y dy/dx
+0.3333 mul h mul add	% x1 y1 = y + (h/3)(dy/dx)
+
+2 copy 0.6 pixel
+% print
+
+currentpoint			% x1 y1 x y
+pop h add				% x1 y1 newx /h x1 x0 sub N div def
+dup f 					% x1 y1 x y
+2 copy					% x1 y1 x y x y
+6 2 roll				% x y x1 y1 x y
+exch dup				% x y x1 y1 y x x
+df						% x y x1 y1 y x dy/dx
+exch					% x y x1 y1 y dy/dx x
+h 0.3333 mul sub		% x y x1 y1 y dy/dx x2
+3 1 roll				% x y x1 y1 x2 y dy/dx
+0.3333 mul h mul sub	% x y x1 y1 x2 y2
+
+2 copy 0.6 pixel
+% print
+
+6 4 roll
+
+2 copy 0 pixel
+% print
+
+curveto
+} repeat
+stroke
+} def
+
+gsave
+0.8 setgray
+newpath
+-2 1 moveto
+2 1 lineto
+-2 0 moveto
+2 0 lineto
+-2 -1 moveto
+2 -1 lineto
+0 -2 moveto
+0 2 lineto
+stroke
+grestore
+
+/x -1 def
+/N 200 def
+/dx 2 N div def
+
+gsave
+currentlinewidth 2 mul setlinewidth
+0.8 setgray
+newpath
+x x f moveto
+N {
+/x x dx add def
+x x f lineto
+} repeat
+stroke
+grestore
+
+0   setgray
+
+-1 1 1 drawcurve
+1 1 0 pixel
+grestore
+
+showpage
+
+%--------------------------------------------
+%!
+%%Page:1 3
+gsave
+
+gsave
+72 dup scale
+1 72 div setlinewidth
+/Times-Roman findfont
+0.35 scalefont
+setfont
+newpath
+0.5 11.25 moveto
+(Curva Bezier 2 segmentos \[-1,0\] \[0,1\]) show
+0.2 10.75 moveto
+(Seg1: -1 1 1 -4 \/-0.66 -0.33 \/-0.33 0.00 \/0 0 1 0) show
+0.2 10.25 moveto
+(Seg2: 0 0 1 0 \/0.33 0 \/0.667 -0.3333\/1 1 1 4) show
+closepath
+grestore
+
+292 421 translate
+
+210 297 scale
+
+1 210 div setlinewidth
+
+% x -> x^{4}
+
+/f {
+dup mul dup mul
+} def
+
+% x -> 4x^{3}
+
+/df {
+dup dup mul mul 4 mul
+} def
+
+/pwd 0.050 def
+
+/pixel {
+gsave
+setgray
+newpath
+moveto
+pwd 2 div neg pwd 2 div neg rmoveto
+pwd 0 rlineto
+0 pwd rlineto
+pwd neg 0 rlineto
+0 pwd neg rlineto
+gsave
+fill
+grestore
+0 setgray
+stroke
+grestore
+} def
+
+
+% stack: N x0 x1
+
+/drawcurve {
+/N exch def
+/x1 exch def
+/x0 exch def
+
+/h x1 x0 sub N div def
+
+newpath
+x0 dup f moveto
+N {						% x y = currentpoint
+currentpoint
+
+2 copy 0 pixel
+
+exch					% y x
+dup 					% y x x
+df						% y x (dy/dx)-->x -> 4x^{3}
+exch					% y (dy/dx x)
+h 0.3333 mul add 		% y dy/dx x1 -->/h x1 x0 sub N div def
+3 1 roll				% x1 y dy/dx
+0.3333 mul h mul add	% x1 y1 = y + (h/3)(dy/dx)
+
+2 copy 0.6 pixel
+% print
+
+currentpoint			% x1 y1 x y
+pop h add				% x1 y1 newx /h x1 x0 sub N div def
+dup f 					% x1 y1 x y
+2 copy					% x1 y1 x y x y
+6 2 roll				% x y x1 y1 x y
+exch dup				% x y x1 y1 y x x
+df						% x y x1 y1 y x dy/dx
+exch					% x y x1 y1 y dy/dx x
+h 0.3333 mul sub		% x y x1 y1 y dy/dx x2
+3 1 roll				% x y x1 y1 x2 y dy/dx
+0.3333 mul h mul sub	% x y x1 y1 x2 y2
+
+2 copy 0.6 pixel
+% print
+
+6 4 roll
+
+2 copy 0 pixel
+% print
+
+curveto
+} repeat
+stroke
+} def
+
+gsave
+0.8 setgray
+newpath
+-2 0 moveto
+2 0 lineto
+0 -2 moveto
+0 2 lineto
+stroke
+grestore
+
+/x -1 def
+/N 200 def
+/dx 2 N div def
+gsave
+currentlinewidth 2 mul setlinewidth
+0.8 setgray
+newpath
+x x f moveto
+N {
+/x x dx add def
+x x f lineto
+} repeat
+stroke
+grestore
+
+0   setgray
+
+-1 1 2 drawcurve
+1 1 0 pixel
+grestore
+showpage
+
+
+%!
+%%Page: 1 4
+gsave
+72 dup scale
+1 72 div setlinewidth
+/Times-Roman findfont
+0.3 scalefont
+setfont
+newpath
+0.5 11 moveto
+(Bezier 4 segmentos \[-1.0,-0.5\] \[-0.5,0.0\] \[0.0,0.5\] \[0.5,1.0\] ) show
+0.2 10.5 moveto
+(Seg1: -1 1 1 -4 \/-0.8 0.33 \/-0.66 0.145 \/-0.5 0.06 1 -0.5) show
+0.2 10 moveto
+(Seg4: 0.5 0.06 1 0.5 \/0.6 0.14 \/0.8 0.3\/1 1 1 4) show
+closepath
+grestore
+gsave
+
+newpath
+%boundary
+%clip
+
+270 450 translate
+
+150 150 scale
+
+1 72 div setlinewidth
+
+
+
+/pwd 0.050 def
+
+/pixel {
+gsave
+setgray
+newpath
+moveto
+pwd 2 div neg pwd 2 div neg rmoveto
+pwd 0 rlineto
+0 pwd rlineto
+pwd neg 0 rlineto
+0 pwd neg rlineto
+gsave
+fill
+grestore
+0 setgray
+stroke
+grestore
+} def
+
+
+% x -> x^{4}
+
+/f {
+dup mul dup mul
+} def
+
+% x -> 4x^{3}
+
+/df {
+dup dup mul mul 4 mul
+} def
+% stack: N x0 x1
+
+/drawcurve {
+/N exch def
+/x1 exch def
+/x0 exch def
+
+/h x1 x0 sub N div def
+
+newpath
+x0 dup f moveto
+N {						% x y = currentpoint
+currentpoint
+
+2 copy 0 pixel
+
+exch					% y x
+dup 					% y x x
+df						% y x (dy/dx)-->x -> 4x^{3}
+exch					% y (dy/dx x)
+h 0.3333 mul add 		% y dy/dx x1 -->/h x1 x0 sub N div def
+3 1 roll				% x1 y dy/dx
+0.3333 mul h mul add	% x1 y1 = y + (h/3)(dy/dx)
+
+2 copy 0.6 pixel
+% print
+
+currentpoint			% x1 y1 x y
+pop h add				% x1 y1 newx /h x1 x0 sub N div def
+dup f 					% x1 y1 x y
+2 copy					% x1 y1 x y x y
+6 2 roll				% x y x1 y1 x y
+exch dup				% x y x1 y1 y x x
+df						% x y x1 y1 y x dy/dx
+exch					% x y x1 y1 y dy/dx x
+h 0.3333 mul sub		% x y x1 y1 y dy/dx x2
+3 1 roll				% x y x1 y1 x2 y dy/dx
+0.3333 mul h mul sub	% x y x1 y1 x2 y2
+
+2 copy 0.6 pixel
+% print
+
+6 4 roll
+
+2 copy 0 pixel
+% print
+
+curveto
+} repeat
+stroke
+} def
+
+gsave
+0.8 setgray
+newpath
+-2 1 moveto
+2 1 lineto
+-2 0 moveto
+2 0 lineto
+-2 -1 moveto
+0 -2 moveto
+0 2 lineto
+stroke
+grestore
+
+/x -1 def
+/N 200 def
+/dx 2 N div def
+gsave
+currentlinewidth 2 mul setlinewidth
+0.8 setgray
+newpath
+x x f moveto
+N {
+/x x dx add def
+x x f lineto
+} repeat
+stroke
+grestore
+
+0   setgray
+
+-1 1 4 drawcurve
+1 1 0 pixel
+grestore
+
+showpage
+
+
+%EndDocument

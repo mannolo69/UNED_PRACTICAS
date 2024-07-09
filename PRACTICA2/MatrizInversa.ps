@@ -1,0 +1,207 @@
+%!PS-ADOBE-3.0
+% Arguments: m[3][3]
+% Returns inverse of m
+28.35 28.35 scale
+% Arguments: matrix M
+% returns transpose of M
+
+/transpose {
+6 dict begin
+/m exch def
+/r m length def
+/c m 0 get length def
+[
+0 1 c 1 sub {
+/i exch def
+[
+0 1 r 1 sub {
+/j exch def
+m j get i get
+} for
+]
+} for
+]
+end
+} def
+
+%------------------------------------------------
+% Arguments: matrices m n
+% Returns the matrix m x n
+
+/matrixmul {
+matrix-mul
+} def
+
+/matrix-mul {
+8 dict begin
+/n exch transpose def
+/m exch def
+/r m length def
+/c n length def
+
+[
+
+0 1 c 1 sub {
+n exch get
+m exch
+matrix-vector
+} for
+
+]
+transpose
+end
+} def
+
+% Arguments: m[3][3]
+% Returns determinant of m
+
+/3x3-determinant {
+1 dict begin
+/m exch def
+
+m 0 get 0 get
+m 1 get 1 get mul
+m 2 get 2 get mul
+
+m 0 get 1 get
+m 1 get 2 get mul
+m 2 get 0 get mul
+
+add
+
+m 0 get 2 get
+m 1 get 0 get mul
+m 2 get 1 get mul
+
+add
+
+m 0 get 2 get
+m 1 get 1 get mul
+m 2 get 0 get mul
+
+sub
+
+m 0 get 0 get
+m 1 get 2 get mul
+m 2 get 1 get mul
+
+sub
+
+m 0 get 1 get
+m 1 get 0 get mul
+m 2 get 2 get mul
+
+sub
+
+end
+} def
+
+/3x3-inverse {
+2 dict begin
+/m exch def
+/d m 3x3-determinant def
+[
+[
+% [0][0]
+m 1 get 1 get
+m 2 get 2 get mul
+m 2 get 1 get
+m 1 get 2 get mul
+sub
+d div
+
+% [0][1]
+m 2 get 1 get
+m 0 get 2 get mul
+m 0 get 1 get
+m 2 get 2 get mul
+sub
+d div
+
+% [0][2]
+m 0 get 1 get
+m 1 get 2 get mul
+m 1 get 1 get
+m 0 get 2 get mul
+sub
+d div
+]
+
+[
+% [1][0]
+m 2 get 0 get
+m 1 get 2 get mul
+m 1 get 0 get
+m 2 get 2 get mul
+sub
+d div
+
+% [1][1]
+m 0 get 0 get
+m 2 get 2 get mul
+m 0 get 2 get
+m 2 get 0 get mul
+sub
+d div
+
+% [1][2]
+m 1 get 0 get
+m 0 get 2 get mul
+m 0 get 0 get
+m 1 get 2 get mul
+sub
+d div
+]
+
+[
+% [2][0]
+m 1 get 0 get
+m 2 get 1 get mul
+m 2 get 0 get
+m 1 get 1 get mul
+sub
+d div
+
+% [2][1]
+m 0 get 1 get
+m 2 get 0 get mul
+m 2 get 1 get
+m 0 get 0 get mul
+sub
+d div
+
+% [2][2]
+m 0 get 0 get
+m 1 get 1 get mul
+m 1 get 0 get
+m 0 get 1 get mul
+sub
+d div
+]
+
+]
+end
+} def
+
+/toint { 3 dict begin
+ /matrix exch def  % Save the input matrix
+    /a matrix 0 get def
+    /b matrix 1 get def
+    /c matrix 2 get def
+
+end}def
+
+
+
+/Helvetica findfont
+1 scalefont setfont
+newpath
+5 20 moveto
+[[1 2 3] [0 -1 4] [5 6 0]]
+3x3-inverse
+toint
+%(      ) cvs show
+closepath
+stroke
+
+ showpage

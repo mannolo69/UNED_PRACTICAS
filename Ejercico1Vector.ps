@@ -1,0 +1,76 @@
+%!PS-Adobe-2.0
+%Manuel Diaz Castro- Ejercicio 1 Practica 4
+%Haz un procedimiento que tenga como entrada los puntos origen y final de un vector
+%y que dibuje dicho vector mediante una flecha visible.
+
+/ppi 72 def % adobe points per inch
+% centro de la hoja
+/paper_width 21 def
+/paper_height 29.7 def
+/dx paper_width 2 div def
+/dy paper_height 2 div def
+/escala_cm 1 2.54 div ppi mul def
+/Helvetica findfont
+0.5 scalefont setfont
+
+
+/start{moveto (vector) show currentpoint} def
+/line {moveto (rline) show} def
+/depth 1 def
+/maxdepth 2 def
+/down {/depth depth 1 add def} def
+/up {/depth depth 1 sub def } def
+
+/getVector {
+    4 dict begin %Coordenadas del vector
+
+    /p2 exch def
+    /p1 exch def
+
+    /vectorX1 p1 0 get def
+    /vectorY1 p1 1 get def
+    /vectorX2 p2 0 get def
+    /vectorY2 p2 1 get def
+
+
+
+/doLine {vectorX2 vectorX1 sub vectorY2 vectorY1 sub rlineto currentpoint
+stroke translate 0 0 moveto } def
+/FractArrow
+{gsave
+down doLine %Imprime linea del vector
+depth maxdepth le %depth<max. depth?
+{
+0.02 0.02 scale
+135 rotate FractArrow
+-270 rotate FractArrow} if %crea la flecha del vector
+up grestore } def
+
+escala_cm dup scale
+1 25 div setlinewidth
+vectorX1 vectorY1 moveto
+{start} {line} {curve} {fin} pathforall %para imprimir en el path del vector
+vectorX1 vectorY1 moveto
+FractArrow %dibuja
+stroke
+end} def
+
+gsave
+escala_cm dup scale
+/Helvetica findfont
+0.5 scalefont setfont
+1 25 div setlinewidth
+2 28.5 moveto
+(Haz un procedimiento que tenga como entrada) show
+2 27.5 moveto
+(los puntos origen y final de un vector) show
+2 26.5 moveto
+(y que dibuje dicho vector mediante una flecha visible.) show
+grestore
+gsave
+[8 14] [16 29] getVector
+grestore
+gsave
+[10 14] [5 2] getVector
+grestore
+showpage

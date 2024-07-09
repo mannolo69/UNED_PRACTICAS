@@ -1,0 +1,74 @@
+%!PS-ADOBE-2.0
+%Manuel Diaz Castro
+%Informatica Grafica-Practica 4
+%b) La Hiperbola.
+
+%Una hiperbola (del griego ὑπερβολή) es una curva abierta de dos ramas,
+%obtenida cortando un cono recto mediante un plano no necesariamente paralelo al eje de simetría,
+% y con ángulo menor que el de la generatriz respecto del eje de revolución.
+
+/f { 1 dict begin
+/t exch def
+[
+  1 t cos div 1 mul
+  t sin t cos div 1 mul
+]
+end } def
+
+% a b N
+/make-curve { 1 dict begin
+/N exch def
+/b exch def
+/a exch def
+/t a def
+/dt b a sub N div def
+t f aload pop moveto
+N {
+  /t t dt add def
+  t f aload pop lineto  	
+} repeat
+end } def
+% --- dibujando --------------------------------------------
+
+
+45 dup scale
+3 36 div setlinewidth
+
+6.7 10 translate
+
+/Helvetica-Bold findfont
+.5 scalefont setfont
+-1.3 5.2 moveto (Hiperbola) show
+
+
+-6 -4 moveto
+12 0 rlineto
+0 8 rlineto
+-12 0 rlineto
+closepath
+clip
+stroke
+
+
+newpath
+-6 0 moveto
+12 0 rlineto
+
+0 -4 moveto
+0 8 rlineto
+
+stroke
+
+gsave
+0 0 0.8 setrgbcolor
+stroke
+grestore
+
+newpath
+%left-half
+91 269 200 make-curve
+%right-half
+271 449 200 make-curve
+1 0 0 setrgbcolor
+stroke
+showpage

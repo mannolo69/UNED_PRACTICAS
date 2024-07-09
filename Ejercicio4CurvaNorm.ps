@@ -1,0 +1,153 @@
+%PS-2.0
+%Informática Gráfica - Práctica 4
+%Manuel Diaz Castro
+
+%4. La Curva Normal es la curva que describe una distribucion teorica de probabilidad a
+%la que se acercan todas las distribuciones reales.
+
+
+/grafica {load
+    /f exch def
+    %4 20 moveto f ( ) cvs show
+    1 dict begin
+    /N exch def
+    /x1 exch def
+    /x0 exch def
+    /h x1 x0 sub N div def
+    /x x0 def
+    /F x f def
+    /y F 0 get def
+    /s F 1 get def
+    x y moveto
+    N {
+        x h 3 div add
+        y h 3 div s mul add
+        /x x h add def
+        /F x f def
+        /y F 0 get def
+        /s F 1 get def
+        x h 3 div sub
+        y h 3 div s mul sub
+        x y
+        curveto
+    } repeat
+end} def
+
+
+
+%a) Dibuja la distribucion Normal Tipificada. Es cuando mu = 0 y sigma = 1
+%b) Dibuja varias curvas normales para distintos parametros de sigma. Centralas todas
+%en el 0, esto es, con μ = 0.
+/apartadoF { 2 dict begin
+/x exch def
+/sigma 1 def
+/pi 3.14 def
+/mu 0 def
+[
+    %y = % f(x)= ((1/ sigma * (sqrt 2 * pi)) * (e^(-1/2 · ((x - mu)/sigma)^2))
+    1 sigma 2 pi mul sqrt mul div 2.7182 -0.5 x mu sub dup mul sigma sigma mul div mul exp mul 5 mul
+    %y´= -((x - mu)/ (sigma^3 * (sqrt 2*pi))) · (e^(-1/2 · ((x - mu)/sigma)^2)
+    x mu sub sigma sigma mul sigma mul 2 pi mul sqrt mul div neg 2.7182 -0.5 x mu sub dup mul sigma sigma mul div mul exp x x mul -0.5 mul mul 5 mul
+]
+end } def
+
+
+/apartadoG { 2 dict begin
+/xa exch def
+/sigma2 0.6 def
+/pi2 3.14 def
+/mu2 0 def
+[
+    %y = % f(x)= ((1/ sigma * (sqrt 2 * pi)) * (e^(-1/2 · ((x - mu)/sigma)^2))
+    1 sigma2 2 pi2 mul sqrt mul div 2.7182 -0.5 xa mu2 sub dup mul sigma2 sigma2 mul div mul exp mul 5 mul
+    %y´= -((x - mu)/ (sigma^3 * (sqrt 2*pi))) · (e^(-1/2 · ((x - mu)/sigma)^2)
+    xa mu2 sub sigma2 sigma2 mul sigma2 mul 2 pi2 mul sqrt mul div neg 2.7182 -0.5 xa mu2 sub dup mul sigma2 sigma2 mul div mul exp xa xa mul -0.5 mul mul 5 mul
+]
+ }def
+
+ /apartadoH { 2 dict begin
+/xa exch def
+/sigma2 1.2 def
+/pi2 3.14 def
+/mu2 0 def
+[
+    %y = % f(x)= ((1/ sigma * (sqrt 2 * pi)) * (e^(-1/2 · ((x - mu)/sigma)^2)
+    1 sigma2 2 pi2 mul sqrt mul div 2.7182 -0.5 xa mu2 sub dup mul sigma2 sigma2 mul div mul exp mul 5 mul
+    %y´= -((x - mu)/ (sigma^3 * (sqrt 2*pi))) · (e^(-1/2 · ((x - mu)/sigma)^2)
+    xa mu2 sub sigma2 sigma2 mul sigma2 mul 2 pi2 mul sqrt mul div neg 2.7182 -0.5 xa mu2 sub dup mul sigma2 sigma2 mul div mul exp xa xa mul -0.5 mul mul 5 mul
+]
+ }def
+
+
+/Arial findfont
+0.8 scalefont setfont
+72 72 scale
+1 25 div setlinewidth
+4.2 4 translate
+
+% Eje de coordenadas
+newpath
+-10.5 0 moveto  %Eje X
+10.5 0 lineto
+0 -14.85 moveto %Eje Y
+0 14.85 lineto
+stroke closepath
+
+% Marcadores
+gsave
+newpath
+-1 0.2 moveto
+-1 -0.2 lineto
+1 0.2 moveto
+1 -0.2 lineto
+0.2 -4 moveto
+-0.2 -4 lineto
+0.2 4 moveto
+-0.2 4 lineto
+stroke
+closepath
+grestore
+
+% f(x)= ((1/ sigma * (sqrt 2 * pi)) * (e^(-1/2 · ((x - mu )/sigma)^2))
+gsave
+newpath
+1 25 div setlinewidth
+0 0 1 setrgbcolor
+1 /misigma exch def
+-4 misigma mul 4 misigma mul 100 /apartadoF grafica
+stroke
+closepath
+grestore
+
+
+
+gsave
+1 25 div setlinewidth
+
+newpath
+1 0 1 setrgbcolor
+0.6 /misigma exch def
+-4 misigma mul 4 misigma mul 200 /apartadoG grafica
+stroke
+closepath
+
+gsave
+1 25 div setlinewidth
+
+newpath
+0 1 0 setrgbcolor
+1.2 /misigma exch def
+-4 misigma mul 4 misigma mul 300 /apartadoH grafica
+stroke
+closepath
+
+gsave
+/Arial findfont
+0.4 scalefont setfont
+0 0 0 setrgbcolor
+
+newpath
+-3.8 5 moveto (Distribucion Normal:  ) show
+closepath
+
+grestore

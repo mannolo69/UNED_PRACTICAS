@@ -1,0 +1,80 @@
+%!PS-2.0
+%Manuel Diaz Castro
+%Informatica Grafica - Practica 4
+
+
+%(Ejercicios 7.1 y 7.2 ) Modificar el procedimiento f de la sección 7.1
+%para que dibuje las siguientes gráficas:
+%a) y = x7 − 3x5 + 2x2 − 11 entre −5 y 5.
+
+/grafica {load
+    /f exch def
+    1 dict begin
+    /N exch def
+    /x1 exch def
+    /x0 exch def
+    /h x1 x0 sub N div def
+    /x x0 def
+    /F x f def
+    /y F 0 get def
+    /s F 1 get def
+    x y moveto
+    N {
+        x h 3 div add
+        y h 3 div s mul add
+        /x x h add def
+        /F x f def
+        /y F 0 get def
+        /s F 1 get def
+        x h 3 div sub
+        y h 3 div s mul sub
+        x y
+        curveto
+    } repeat
+end} def
+
+
+/apartadoA { 2 dict begin
+/x exch def
+[
+    x x mul x mul x mul x mul x mul x mul x x mul x mul x mul x mul -3 mul add x x mul 2 mul add 11 sub % y = x^7 − 3x^5 + 2x^2 − 11
+    x x mul x mul x mul x mul x mul 7 mul x x mul -15 mul x 4 mul add                                   % y´= 7x^6 - 15x^2 + 4x
+]
+end } def
+
+
+/Arial findfont
+0.6 scalefont setfont
+
+28.35 28.35 scale
+1 25 div setlinewidth
+10.5 14.85 translate
+
+% Eje de coordenadas
+newpath
+-10.5 0 moveto  %Eje X
+10.5 0 lineto
+0 -14.85 moveto %Eje Y
+0 14.85 lineto
+stroke closepath
+
+% Marcadores
+newpath
+-5 0.2 moveto
+-5 -0.2 lineto
+5 0.2 moveto
+5 -0.2 lineto
+0.2 -5 moveto
+-0.2 -5 lineto
+0.2 5 moveto
+-0.2 5 lineto
+stroke
+closepath
+
+% a) y = x^7 − 3x^5 + 2x^2 − 11 entre −5 y 5.
+newpath
+0 0 1 setrgbcolor
+-5 5 4200 /apartadoA grafica
+2.5 2 moveto (y = x^7 - 3x^5 + 2x^2 - 11) show
+stroke
+closepath

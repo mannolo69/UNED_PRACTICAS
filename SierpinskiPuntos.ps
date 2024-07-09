@@ -1,0 +1,42 @@
+%!PS-2.0
+%Manuel diaz Castro
+%Practica 4-Informatica Grafica 2024
+%Construye un procedimiento en PostScript que genere el tri´angulo de
+%Sierpinski.
+
+
+gsave
+0.01 setlinewidth
+/pwd 0.125 def
+/controlwidth 0.025 def
+
+/blackpixel {
+gsave
+translate
+newpath
+pwd neg pwd neg moveto
+pwd pwd neg lineto
+pwd pwd lineto
+pwd neg pwd lineto
+closepath
+fill
+grestore
+0 setgray
+stroke
+} def
+
+%vertices
+/x [9 590 9] def
+/y [735 400 65] def
+
+%punto de inicio
+/X 9 def /Y 735 def
+
+100000 {
+ X Y blackpixel    % dibujar punto
+ rand 3 mod    % numero aleatorio
+ dup x exch get X add 2 div /X exch def    % nuevas x
+ y exch get Y add 2 div /Y exch def    % nuevas y
+} repeat
+grestore
+showpage

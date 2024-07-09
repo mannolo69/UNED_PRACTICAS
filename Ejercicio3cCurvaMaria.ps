@@ -1,0 +1,121 @@
+%!PS-ADOBE-2.0
+%Manuel Diaz Castro
+%Informatica Grafica - Practica 4
+
+
+%(Ejercicios 7.1 y 7.2 ) Modificar el procedimiento f de la sección 7.1
+%para que dibuje las siguientes gráficas:
+
+/grafica {load
+    /f exch def
+    1 dict begin
+    /N exch def
+    /x1 exch def
+    /x0 exch def
+    /h x1 x0 sub N div def
+    /x x0 def
+    /F x f def
+    /y F 0 get def
+    /s F 1 get def
+    x y moveto
+    N {
+        x h 3 div add
+        y h 3 div s mul add
+        /x x h add def
+        /F x f def
+        /y F 0 get def
+        /s F 1 get def
+        x h 3 div sub
+        y h 3 div s mul sub
+        x y
+        curveto
+    } repeat
+end} def
+
+
+%e) Curva de Maria Agnesi:  y = a^3/(x^2 + a^2) con a > 0.
+%Dibuja varias curvas en función de a.
+/apartadoCa { 2 dict begin
+/x exch def
+[
+    2 2 mul 2 mul x x mul 2 2 mul add div                   %y = a^3/(x^2 + a^2) donde a = 2
+    -16 x mul x x mul 4 add x x mul 4 add mul div       %y´= -16x / (x^2 + 4)^2
+]
+end } def
+
+/apartadoCb { 2 dict begin
+/x exch def
+[
+    4 4 mul 4 mul x x mul 4 4 mul add div                   %y = a^3/(x^2 + a^2) donde a = 4
+    -128 x mul x x mul 16 add x x mul 16 add mul div    %y´= -128x / (x^2 + 16)^2
+]
+end } def
+
+/apartadoCc { 2 dict begin
+/x exch def
+[
+    6 6 mul 6 mul x x mul 6 6 mul add div                   %y = a^3/(x^2 + a^2) donde a = 6
+    -432 x mul x x mul 36 add x x mul 36 add mul div    %y´= -432x / (x^2 + 36)^2
+]
+end } def
+
+
+/Arial findfont
+0.8 scalefont setfont
+
+28.35 28.35 scale
+1 25 div setlinewidth
+10.5 14.85 translate
+
+%Eje de coordenadas
+newpath
+-10.5 0 moveto  %Eje X
+10.5 0 lineto
+0 -14.85 moveto %Eje Y
+0 14.85 lineto
+stroke closepath
+
+% Marcadores
+newpath
+-5 0.2 moveto
+-5 -0.2 lineto
+5 0.2 moveto
+5 -0.2 lineto
+0.2 -5 moveto
+-0.2 -5 lineto
+0.2 5 moveto
+-0.2 5 lineto
+stroke
+closepath
+
+
+% Curva de Maria Agnesi:  y = a^3/(x^2 + a^2) con a > 0.
+newpath
+0 0 1 setrgbcolor
+-10.5 10.5 4200 /apartadoCa grafica
+-1 8 moveto (y = a^3/(x^2 + a^2) donde a = 2) show
+stroke
+closepath
+
+newpath
+1 0 0 setrgbcolor
+-10.5 10.5 4200 /apartadoCb grafica
+-1 9 moveto (y = a^3/(x^2 + a^2) donde a = 4) show
+stroke
+closepath
+
+newpath
+1 0 1 setrgbcolor
+-10.5 10.5 4200 /apartadoCc grafica
+-1 10 moveto (y = a^3/(x^2 + a^2) donde a = 6) show
+stroke
+closepath
+gsave
+/Arial findfont
+0.8 scalefont setfont
+0 0 0 setrgbcolor
+newpath
+-7.8 11 moveto (Curva Maria Agnesi: ) show
+closepath
+
+showpage
