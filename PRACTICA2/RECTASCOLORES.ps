@@ -1,0 +1,125 @@
+%!PS-PDF-3.0
+%Informática Gráfica - Práctica 2
+%MANUEL DIAZ CASTRO
+
+%1. EL PROBLEMA DEL DIBUJO DE LAS RECTAS FINITAS
+
+
+%• Ahora cambia la escala para trabajar en cm. Haz una traslación del origen a (5, 10).
+%Dibuja a continuación las siguientes rectas:
+
+
+%a) x + y − 10 = 0 en rojo
+%b) −5x + 2y = 10 en verde
+%c) x = y en azul
+%d) y = -1\2x -1 en naranja
+%e) x = -1 en otro color distinto a los anteriores
+%f) Ejes de coordenadas en color negro
+
+%Procedimiento que encuentra el primer (P) y el último (Q) punto de la recta.
+/segment-page {1 dict begin
+aload pop
+/C exch def
+/B exch def
+/A exch def
+
+A abs B abs le
+{
+    /xleft 0 def
+    /xright 597.6 def
+    /yleft C A xleft mul add B div neg def
+    /yright C A xright mul add B div neg def
+    [xleft yleft][xright yright]
+} {
+    /yleft 0 def
+    /yright 842.4 def
+    /xleft C B yleft mul add A div neg def
+    /xright C B yright mul add A div neg def
+    [xleft yleft][xright yright]
+} ifelse
+end} def
+
+/
+
+
+%Procedimiento que dibuja el segmento de P a Q
+/mkline {1 dict begin
+aload pop
+/C exch def
+/B exch def
+/A exch def
+
+/T
+matrix defaultmatrix
+matrix currentmatrix
+matrix invertmatrix
+matrix concatmatrix
+def
+stack
+[
+    A T 0 get mul
+    B T 1 get mul add
+
+    A T 2 get mul
+    B T 3 get mul add
+
+    T 4 get A mul
+    T 5 get B mul add
+    C add
+]
+
+segment-page
+aload pop T transform moveto
+aload pop T transform lineto
+end} def
+
+
+newpath
+
+28.35 28.35 scale
+1 25 div setlinewidth
+
+/Arial findfont
+0.5 scalefont setfont
+
+5 10 translate
+
+%a) x + y − 10 = 0 en rojo
+1 0 0 setrgbcolor
+10 5 moveto(x + y - 10 = 0) show
+[1 1 -10] mkline
+stroke
+
+%b) −5x + 2y = 10 en verde
+0 1 0 setrgbcolor
+10 4 moveto(-5x + 2y = 10) show
+[-5 2 -10] mkline
+stroke
+
+%c) x = y en azul
+0 0 1 setrgbcolor
+10 3 moveto(x = y) show
+[1 -1 0] mkline
+stroke
+
+%d) y = - 1\2x -1 en naranja
+1 0.5 0 setrgbcolor
+10 2 moveto(y = -1/2x -1) show
+[0.5 1 1] mkline
+stroke
+
+%e) x = −1 en otro color distinto a los anteriores
+1 0 1 setrgbcolor
+10 1 moveto(x = -1) show
+[-1 0 -1] mkline
+stroke
+
+%f) Ejes de coordenadas en color negro
+0 0 0 setrgbcolor
+10 6 moveto(Eje de coordenadas) show
+[0 1 0] mkline
+stroke
+[1 0 0] mkline
+stroke
+closepath
+showpage

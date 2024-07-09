@@ -1,0 +1,121 @@
+%!PS-PDF-3.0
+%Informática Gráfica - Práctica 2
+%MANUEL DIAZ CASTRO
+
+%2. OTRA FORMA DE DIBUJAR LAS RECTAS EN UNA PÁGINA
+
+%En la sección 4.7 se describe otra forma de resolver el problema
+%mediante la intersección de polígonos. Implementar el procedimiento
+%que allí se explica y probarlo.
+
+%Procedimiento que recibe los parámetros P(x,y) Q(x,y) A B C
+%y cuya salida son los puntos de intersección.
+/intersect {4 dict begin
+aload pop
+
+/C exch def
+/B exch def
+/A exch def
+/Qy exch def
+/Qx exch def
+/Py exch def
+/Px exch def
+
+%Comprobar intersección de la recta cuando x = P(x)
+A Px mul C add B div -1 mul
+Py ge     %X >= Y
+A Px mul C add B div -1 mul
+Qy le     %X <= Y
+and    %SI S, T, SON CIERTAS
+{
+    ([) show
+    Px
+    (                         )cvs show
+    (, ) show
+    A Px mul C add B div -1 mul
+    (                         )cvs show
+    (]) show
+} if
+
+%Comprobar intersección de la recta cuando x = Q(x)
+A Qx mul C add B div -1 mul
+Py ge
+A Qx mul C add B div -1 mul
+Qy le
+and
+{
+    ([) show
+    Qx
+    (                         )cvs show
+    (, ) show
+    A Qx mul C add B div -1 mul
+    (                         )cvs show
+    (]) show
+} if
+
+%Comprobar intersección de la recta cuando y = P(y)
+B Py mul C add A div -1 mul
+Px ge
+B Py mul C add A div -1 mul
+Qx le
+and
+{
+    ([) show
+    B Py mul C add A div -1 mul
+    (                         )cvs show
+    (, ) show
+    Py
+    (                         )cvs show
+    (]) show
+} if
+
+%Comprobar intersección de la recta cuando y = Q(y)
+B Qy mul C add A div -1 mul
+Px ge
+B Qy mul C add A div -1 mul
+Qx le
+and
+{
+    ([) show
+    B Qy mul C add A div -1 mul
+    (                         )cvs show
+    (, ) show
+    Qy
+    (                         )cvs show
+    (]) show
+} if
+
+end} def
+
+
+
+newpath
+28.35 28.35 scale
+1 25 div setlinewidth
+
+/Arial findfont
+0.5 scalefont setfont
+
+%d) y = - 1\2x -1
+
+2 26 moveto(Los puntos de corte de la recta y = -1/2x -1 son: ) show
+[0 00 21 30 0.5 1 1]intersect
+
+%a) x + y − 10 = 0
+2 25 moveto(Los puntos de corte de la recta x + y - 10 = 0 son: ) show
+[0 0 21 30 1 1 -10]intersect
+
+%c) x = y
+2 24 moveto(Los puntos de corte de la recta x = y son: ) show
+[0 0 21 30 1 -1 0]intersect
+
+%b) −5x + 2y = 10
+2 23 moveto(Los puntos de corte de la recta -5x + 2y = 10 son: ) show
+[0 0 21 30 -5 2 -10]intersect
+
+%e) x = -1
+2 22 moveto(Los puntos de corte de la recta x = -1 son: ) show
+[0 0 21 30 1 1 1]intersect
+
+closepath
+showpage
